@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel One P&L Dashboard Clone</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* --- START: ROBOTO FONT FACE DEFINITIONS (Provided by User) --- */
+        /* cyrillic-ext */
+        @font-face {
+          font-family: 'Roboto';
+          font-style: normal;
+          font-weight: 400;
+          font-stretch: 100%;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3GUBGEe.woff2) format('woff2');
+          unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+        }
+        /* cyrillic */
+        @font-face {
+          font-family: 'Roboto';
+          font-style: normal;
+          font-weight: 400;
+          font-stretch: 100%;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3iUBGEe.woff2) format('woff2');
+          unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+        }
+        /* greek-ext */
+        @font-face {
+          font-family: 'Roboto';
+          font-style: normal;
+          font-weight: 400;
+          font-stretch: 100%;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3CUBGEe.woff2) format('woff2');
+          unicode-range: U+1F00-1FFF;
+        }
+        /* greek */
+        @font-face {
+          font-family: 'Roboto';
+          font-style: normal;
+          font-weight: 400;
+          font-stretch: 100%;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3-UBGEe.woff2) format('woff2');
+          unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+        }
+        /* math */
+        @font-face {
+          font-family: 'Roboto';
+          font-style: normal;
+          font-weight: 400;
+          font-stretch: 100%;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMawCUBGEe.woff2) format('woff2');
+          unicode-range: U+0302-0303, U+0305, U+0307-0308, U+0310, U+0312, U+0315, U+031A, U+0326-0327, U+032C, U+032F-0330, U+0332-0333, U+0338, U+033A, U+0346, U+034D, U+0391-03A1, U+03A3-03A9, U+03B1-03C9, U+03D1, U+03D5-03D6, U+03F0-03F1, U+03F4-03F5, U+2016-2017, U+2034-2038, U+203C, U+2040, U+2043, U+2047, U+2050, U+2057, U+205F, U+2070-2071, U+2074-208E, U+2090-209C, U+20D0-20DC, U+20E1, U+20E5-20EF, U+2100-2112, U+2114-2115, U+2117-2121, U+2123-214F, U+2190, U+2192, U+2194-21AE, U+21B0-21E5, U+21F1-21F2, U+21F4-2211, U+2213-2214, U+2216-22FF, U+2308-230B, U+2310, U+2319, U+231C-2321, U+2336-237A, U+237C, U+2395, U+239B-23B7, U+23D0, U+23DC-23E1, U+2474-2475, U+25AF, U+25B3, U+25B7, U+25BD, U+25C1, U+25CA, U+25CC, U+25FB, U+266D-266F, U+27C0-27FF, U+2900-2AFF, U+2B0E-2B11, U+2B30-2B4C, U+2BFE, U+3030, U+FF5B, U+FF5D, U+1D400-1D7FF, U+1EE00-1EEFF;
+        }
+        }
+        /* symbols */
+        @font-face {
+          font-family: 'Roboto';
+          font-style: normal;
+          font-weight: 400;
+          font-stretch: 100%;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMaxKUBGEe.woff2) format('woff2');
+          unicode-range: U+0001-000C, U+000E-001F, U+007F-009F, U+20DD-20E0, U+20E2-20E4, U+2150-218F, U+2190, U+2192, U+2194-2199, U+21AF, U+21E6-21F0, U+21F3, U+2218-2219, U+2299, U+22C4-22C6, U+2300-243F, U+2440-244A, U+2460-24FF, U+25A0-27BF, U+2800-28FF, U+2921-2922, U+2981, U+29BF, U+29EB, U+2B00-2BFF, U+4DC0-4DFF, U+FFF9-FFFB, U+10140-1018E, U+10190-1019C, U+101A0, U+101D0-101FD, U+102E0-102FB, U+10E60-10E7E, U+1D2C0-1D2D3, U+1D2E0-1D37F, U+1F000-1F0FF, U+1F100-1F1AD, U+1F1E6-1F1FF, U+1F30D-1F30F, U+1F315, U+1F31C, U+1F31E, U+1F320-1F32C, U+1F336, U+1F378, U+1F37D, U+1F382, U+1F393-1F39F, U+1F3A7-1F3A8, U+1F3AC-1F3AF, U+1F3C2, U+1F3C4-1F3C6, U+1F3CA-1F3CE, U+1F3D4-1F3E0, U+1F3ED, U+1F3F1-1F3F3, U+1F3F5-1F3F7, U+1F408, U+1F415, U+1F41F, U+1F426, U+1F43F, U+1F441-1F442, U+1F444, U+1F446-1F449, U+1F44C-1F44E, U+1F453, U+1F46A, U+1F47D, U+1F4A3, U+1F4B0, U+1F4B3, U+1F4B9, U+1F4BB, U+1F4BF, U+1F4C8-1F4CB, U+1F4D6, U+1F4DA, U+1F4DF, U+1F4E3-1F4E6, U+1F4EA-1F4ED, U+1F4F7, U+1F4F9-1F4FB, U+1F4FD-1F4FE, U+1F503, U+1F507-1F50B, U+1F50D, U+1F512-1F513, U+1F53E-1F54A, U+1F54F-1F5FA, U+1F610, U+1F650-1F67F, U+1F687, U+1F68D, U+1F691, U+1F694, U+1F698, U+1F6AD, U+1F6B2, U+1F6B9-1F6BA, U+1F6BC, U+1F6C6-1F6CF, U+1F6D3-1F6D7, U+1F6E0-1F6EA, U+1F6F0-1F6F3, U+1F6F7-1F6FC, U+1F700-1F7FF, U+1F800-1F80B, U+1F810-1F847, U+1F850-1F859, U+1F860-1F887, U+1F890-1F8AD, U+1F8B0-1F8BB, U+1F8C0-1F8C1, U+1F900-1F90B, U+1F93B, U+1F946, U+1F984, U+1F996, U+1F9E9, U+1FA00-1FA6F, U+1FA70-1FA7C, U+1FA80-1FA89, U+1FA8F-1FAC6, U+1FACE-1FADC, U+1FADF-1FAE9, U+1FAF0-1FAF8, U+1FB00-1FBFF;
+        }
+        /* vietnamese */
+        @font-face {
+          font-family: 'Roboto';
+          font-style: normal;
+          font-weight: 700;
+          font-stretch: 100%;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3OUBGEe.woff2) format('woff2');
+          unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+        }
+        /* latin-ext */
+        @font-face {
+          font-family: 'Roboto';
+          font-style: normal;
+          font-weight: 700;
+          font-stretch: 100%;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3KUBGEe.woff2) format('woff2');
+          unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+        /* latin */
+        @font-face {
+          font-family: 'Roboto';
+          font-style: normal;
+          font-weight: 700;
+          font-stretch: 100%;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBA.woff2) format('woff2');
+          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        /* --- END: ROBOTO FONT FACE DEFINITIONS --- */
+
+
+        html {
+            /* Using Roboto as the primary font, as inferred from the provided source code */
+            font-family: 'Roboto', sans-serif; 
+        }
+
+        /* --- Custom CSS Variables and Colors (Mapping Snippet's Design System) --- */
+        :root {
+            /* Primary Brand Color (Blue) */
+            --color-primary-default: #007bff;
+            /* Primary Dark Shadow */
+            --shadow-primary-dark: 0 4px 6px rgba(0, 123, 255, 0.3);
+            /* Primary Surface Color (light hover blue) */
+            --color-primary-surface: #e6f2ff;
+            /* Primary Pressed Color (darker blue for active state) */
+            --color-primary-pressed: #0056b3; 
+            
+            /* Success Brand Color (Deep Green/Profit) */
+            --color-text-success: #0c8b67;
+            
+            /* Neutral Colors */
+            --color-neutral-90: #1f2937; /* Very dark gray/black text (used for amounts) */
+            --color-neutral-10: #ffffff; /* White text/icon fill */
+            --color-neutral-40: #e5e7eb; /* Light border line */
+            
+            /* Custom Neutral shades for placeholder calendar */
+            --color-neutral-30: #d1d5db; /* A lighter gray for day labels */
+            --color-neutral-20: #f3f4f6; /* Very light gray for borders/backgrounds */
+            --color-neutral-50: #6b7280; /* Medium gray for text */
+            
+            /* Success Background/Border Colors */
+            --color-success-surface: #eaf8f4; /* Light mint/lightest green background */
+            --color-success-default: #d1fae5; /* Light green/Success border background */
+        }
+        
+        /* Tailwind-equivalent classes from the snippet's custom design system */
+        .text-primary-default { color: var(--color-primary-default); }
+        .bg-primary-surface { background-color: var(--color-primary-surface); }
+        .bg-success-surface { background-color: var(--color-success-surface); }
+        .bg-success-default { background-color: var(--color-success-default); }
+        .border-success-default { border-color: var(--color-success-default); }
+        .text-success-default { color: var(--color-text-success); }
+        .border-neutral-40 { border-color: var(--color-neutral-40); }
+        .text-neutral-90 { color: var(--color-neutral-90); }
+        .text-neutral-10 { color: var(--color-neutral-10); }
+        .shadow-primary-dark { box-shadow: var(--shadow-primary-dark); }
+        
+        /* New Neutral Mappings for placeholder calendar */
+        .text-neutral-30 { color: var(--color-neutral-30); }
+        .text-neutral-50 { color: var(--color-neutral-50); }
+        .border-neutral-20 { border-color: var(--color-neutral-20); }
+        .bg-neutral-20 { background-color: var(--color-neutral-20); }
+        
+        /* Custom Icon Class for the 'GO BACK' button chevron */
+        .icon-left::before {
+            content: '←'; /* Unicode left arrow */
+            font-weight: 700;
+        }
+
+        /* P&L Dot Custom Colors (Highly calibrated for screenshot match) */
+        .dot-profit-lg { background-color: #32d78a; } /* Light Green/Medium Profit */
+        .dot-profit-dg { background-color: #0c8b67; } /* Darker Green/High Profit */
+        .dot-loss-lr { background-color: #f46e7b; } /* Light Red/Pink/Medium Loss */
+        .dot-loss-dr { background-color: #e54b63; } /* Dark Red/High Loss */
+        .text-profit { color: #0c8b67; }
+        .text-loss { color: #e54b63; }
+        /* Date Range Pill Color (very light green/mint) */
+        .bg-date-pill { background-color: #eaf8f4; }
+        .text-date-pill { color: #0c8b67; }
+
+        /* --- CALENDAR STYLES --- */
+        
+        /* Base dot styling - applies the general circle/flex properties */
+        .pnl-dot {
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: white;
+            line-height: 1; 
+            transition: all 0.1s ease; /* Smooth sizing transition */
+        }
+        
+        /* Dynamic Sizes based on P&L value (calculated in JS) */
+        .pnl-dot.size-sm { width: 1.5rem; height: 1.5rem; font-size: 0.65rem; } /* ~100 to 700 */
+            .pnl-dot.size-md { width: 2rem; height: 2rem; font-size: 0.7rem; }    /* ~700 to 1500 */
+            .pnl-dot.size-lg { width: 2.5rem; height: 2.5rem; font-size: 0.8rem; }   /* > 1500 */
+            
+            /* Wrapper for the dot and tooltip - uses the 'group' class for hover state */
+        .pnl-cell-content {
+            display: flex;
+            flex-direction: column;
+            width: 5.5rem; /* fixed width for cell content inner wrapper */
+            height: 3.25rem;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+            padding-bottom: 2rem; /* Ensure space for the amount text */
+        }
+        
+        /* Wrapper specifically for the dot element to allow relative positioning of the tooltip */
+        .pnl-dot-wrapper-inner {
+             position: relative;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+        }
+
+        /* Centering container for dates with no dot (flat dates) */
+        .flat-date-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            padding-top: 1rem;
+        }
+        
+        .flat-date-number {
+            font-size: 0.75rem; 
+            font-weight: 500;
+            color: #4b5563; 
+            margin-bottom: 0.5rem;
+        }
+        
+        .flat-dash {
+            font-size: 0.8rem;
+            color: #4b5563; 
+        }
+        
+        .calendar-cell {
+            min-height: 5.5rem; 
+            border-right: 1px solid #f3f4f6;
+            border-bottom: 1px solid #f3f4f6;
+            padding: 0.25rem;
+            position: relative;
+            text-align: center;
+            overflow: hidden; 
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 5-Column Grid for M-F View */
+        .calendar-cell:nth-child(5n) {
+            border-right: none;
+        }
+
+        .pnl-value-wrapper {
+            position: absolute;
+            bottom: 0.25rem; /* Positioned low in the cell */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pnl-value {
+            font-size: 0.7rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        /* Custom HR element for underline effect matching the screenshot */
+        .pnl-value-underline {
+            position: absolute;
+            bottom: -3px; /* Adjusted to sit just under the text */
+            height: 1px;
+            width: 100%;
+            background-color: currentColor; /* Inherit color from text */
+            border: none;
+            opacity: 1; /* Always visible if data exists */
+        }
+        
+        /* --- Custom Tooltip Styles (Mirroring Screenshot) --- */
+        .pnl-tooltip-container {
+            position: absolute;
+            z-index: 50;
+            /* Positioned above the dot wrapper */
+            bottom: 100%; 
+            left: 50%;
+            transform: translateX(-50%) translateY(0); /* Initial position */
+            
+            background-color: #333d52; /* Dark background from screenshot */
+            color: white;
+            padding: 18px 24px; 
+            border-radius: 8px;
+            
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            width: max-content; 
+            min-width: 160px; 
+            max-width: 200px;
+        }
+
+        /* Hover effect applied to the outer "group" class (pnl-cell-content) */
+        .pnl-cell-content:hover .pnl-tooltip-container {
+            opacity: 1;
+            /* Move up slightly on hover */
+            transform: translateX(-50%) translateY(-10px); 
+        }
+
+        /* Tooltip Pointer (Caret) */
+        .pnl-tooltip-container::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid #333d52; /* Match background color */
+            transform: translateX(-50%) translateY(8px);
+        }
+        
+        .tooltip-title {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.2;
+            color: white;
+            margin-bottom: 6px; 
+        }
+        .tooltip-value {
+            font-size: 1.35rem; 
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        /* Modal Backdrop and Content Styles */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        .modal-content {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        /* Styling for the Date Range Buttons */
+        .date-range-button {
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #d1d5db; 
+            background-color: #ffffff;
+            color: #4b5563; 
+            font-size: 0.875rem; 
+            font-weight: 500;
+            transition: all 0.1s ease;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        .date-range-button:hover {
+            background-color: #f3f4f6; 
+        }
+        .date-range-button.active {
+            background-color: #007bff; 
+            color: white;
+            border-color: #007bff;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <div id="app" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Header/Navigation Bar (Accurate Mockup of the top bar) -->
+        <header class="flex justify-between items-center px-5 bg-white border-b border-gray-200 sticky top-0 z-20">
+            <div class="h-8 w-32 py-4 flex items-center">
+                <!-- START Logo using the uploaded PNG (angel-one.jpg.png) -->
+                <div class="h-full w-full flex items-center justify-start">
+                    <img 
+                        src="uploaded:angel-one.jpg.png-66ae3f9f-2ec7-4491-b9e7-282c5152c2ca" 
+                        alt="Angel One Logo" 
+                        loading="lazy" 
+                        decoding="async" 
+                        class="h-8 w-auto object-contain"
+                    >
+                </div>
+                <!-- END Logo -->
+            </div>
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="#" class="text-gray-600 hover:text-blue-600 text-sm py-5 px-2">Trading Insights <span class="bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full ml-1">NEW</span></a>
+                <a href="#" class="text-gray-600 hover:text-blue-600 text-sm py-5 px-2">Trades and Charges</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600 text-sm py-5 px-2">Statement - Ledger</a>
+                <!-- Active Tab Style -->
+                <a href="#" class="text-blue-600 font-medium text-sm py-5 px-2 border-b-2 border-blue-600">Profit and Loss</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600 text-sm py-5 px-2">Download Reports</a>
+            </nav>
+        </header>
+
+        <!-- Main Content Wrapper -->
+        <div class="pt-2">
+
+            <!-- Profit and Loss Details HEADER and Date Range Filters -->
+            <div class="mb-4 bg-white p-4 rounded-xl shadow-lg border border-gray-200">
+                <h1 class="font-medium text-xl text-gray-900 mt-0 mb-4">Profit and Loss Details</h1>
+
+                <div class="flex flex-wrap items-center justify-start mb-2 space-x-4">
+                    <span class="text-sm text-gray-500 mr-2">Date Range:</span>
+                    <button class="date-range-button">Week</button>
+                    <button class="date-range-button">15 Days</button>
+                    <button class="date-range-button">Month</button>
+                    <button class="date-range-button">3 Months</button>
+                    <button class="date-range-button">Year</button>
+                    <!-- Active Date Button Style -->
+                    <button class="date-range-button active">Dec 2023</button>
+                </div>
+                
+                <div class="flex items-center justify-end space-x-3 -mt-10">
+                    <svg class="w-5 h-5 text-gray-500 cursor-pointer hover:text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <button class="flex items-center space-x-1 px-4 py-2 text-sm rounded-md text-blue-600 border border-blue-600 bg-white hover:bg-blue-50 transition duration-150 font-medium">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        <span>DOWNLOAD P/L STATEMENT</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- P&L Summary Cards (FIXED: Evenly spread layout and visible text) -->
+            <div class="flex justify-around items-center mb-8 p-4 bg-white rounded-xl shadow-lg border border-gray-200">
+                
+                <!-- Realized P/L Card -->
+                <div class="flex items-center self-stretch border-b rounded-t-2xl border-success-default flex-grow">
+                    <div class="flex py-3 px-4 items-start self-stretch gap-2.5 flex-grow justify-center">
+                        <div id="pnl-summary-realisedPnl" class="flex items-center gap-3">
+                            <div class="w-11 h-11 flex justify-center items-center rounded-full bg-success-default">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 26 21" preserveAspectRatio="xMidYMid meet" width="26" height="21">
+                                    <path stroke="var(--color-neutral-90)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.218" d="M7.934 6.852h4.726M7.934 8.88h4.726m-1.378 5.276L7.934 10.91h1.181c2.626 0 2.626-4.058 0-4.058"></path>
+                                    <path stroke="var(--color-neutral-90)" stroke-linecap="round" d="M11.563 20.01H5.086c-.276 0-.414 0-.53-.007a4 4 0 0 1-3.76-3.76c-.007-.117-.007-.254-.007-.53v0V8.34v0c0-3.134 0-4.7.83-5.779a4 4 0 0 1 .731-.731C3.428 1 4.995 1 8.13 1h6.296c1.278 0 1.917 0 2.44.145a4 4 0 0 1 2.79 2.789c.144.523.144 1.162.144 2.44v.208"></path>
+                                    <circle cx="19.285" cy="15.075" r="5.925" fill="var(--color-text-success)"></circle>
+                                    <path stroke="rgb(var(--color-neutral-10))" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.33" d="m21.062 15.075-1.777-1.778-1.777 1.777m1.773-1.184v4.232"></path>
+                                </svg>
+                            </div>
+                            <div class="flex flex-col justify-center items-start">
+                                <div class="flex items-center gap-1">
+                                    <h6 class="font-medium text-sm leading-sm text-gray-600">Realized P/L</h6>
+                                    <div class="relative group">
+                                        <div class="cursor-pointer undefined">
+                                            <div class="w-3 h-3 text-neutral-90 border rounded-full border-neutral-90 flex justify-center items-center" aria-describedby="tooltip-pnl-summary-realisedPnl" aria-label="Realized P/L">
+                                                <span class="icon-i-symbol text-[0.438rem] ml-[0.05rem] mt-[0.05rem] font-medium"></span>
+                                            </div>
+                                        </div>
+                                        <div role="tooltip" class="z-50 absolute w-max-content bg-neutral-100 text-neutral-10 text-sm rounded opacity-0 p-2 transition-opacity duration-300 top-[-0.5rem] left-1/2 transform -translate-y-full -translate-x-1/2 hidden !w-60 group-focus-within:opacity-100 group-focus-within:block" id="tooltip-pnl-summary-realisedPnl">
+                                            <div class="absolute w-[0.625rem] h-[0.625rem] bg-neutral-100 transform rotate-45 top-full left-1/2 bottom-0 -translate-x-[50%] -translate-y-[50%] "></div>
+                                            <div class="relative max-w-[19.25rem] ">
+                                                <div class="flex items-center">
+                                                    <div class="text-sm leading-sm ">Net Profit made or Loss incurred for the selected period</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-base leading-base font-semibold mt-1 text-gray-900 undefined">₹6,826.50</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-l border-solid border-neutral-40 h-10"></div>
+                
+                <!-- Total Charges Card -->
+                <div class="flex items-center self-stretch border-b rounded-t-2xl border-success-default flex-grow">
+                    <div class="flex py-3 px-4 items-start self-stretch gap-2.5 flex-grow justify-center">
+                        <div id="pnl-summary-total-charges" class="flex items-center gap-3">
+                            <div class="w-11 h-11 flex justify-center items-center rounded-full bg-success-default">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19" preserveAspectRatio="xMidYMid meet" width="20" height="19">
+                                    <path fill="rgb(var(--color-neutral-10))" d="M1.262 14.539V2.222a.5.5 0 0 1 .853-.354l.86.86a.5.5 0 0 0 .706 0l1.36-1.36a.5.5 0 0 1 .707 0l1.359 1.36a.5.5 0 0 0 .707 0l1.359-1.36a.5.5 0 0 1 .707 0l1.359 1.36a.5.5 0 0 0 .707 0l.859-.86a.5.5 0 0 1 .854.354v10.46h4.774a.5.5 0 0 1 .5.5v1.661c0 1.762-.676 2.917-2.256 2.917H3.94c-1.398 0-2.678-1.033-2.678-3.221"></path>
+                                    <path stroke="var(--color-neutral-90)" d="M3.94 17.76c-1.398 0-2.678-1.033-2.678-3.221V2.222a.5.5 0 0 1 .853-.354l.86.86a.5.5 0 0 0 .706 0l1.36-1.36a.5.5 0 0 1 .707 0l1.359 1.36a.5.5 0 0 0 .707 0l1.359-1.36a.5.5 0 0 1 .707 0l1.359 1.36a.5.5 0 0 0 .707 0l.859-.86a.5.5 0 0 1 .854.354v10.46m-9.72 5.078c1.398 0 2.731-.608 2.731-2.917v-1.66a.5.5 0 0 1 .5-.5h6.489m-9.72 5.077h12.738c1.58 0 2.256-1.155 2.256-2.917v-1.66a.5.5 0 0 0-.5-.5h-4.774"></path>
+                                    <path d="M7.055 15.356c0 .77-.296 1.943-.942 1.943 3.154 0 8.438-.01 10.643-.01 1.338 0 1.732-1.232 1.732-1.933v-1.85a.5.5 0 0 0-.5-.5H7.555a.5.5 0 0 0-.5.5z" fill="var(--color-text-success)"></path>
+                                    <path stroke="var(--color-neutral-90)" stroke-linecap="round" d="M3.8 6.61h7.493M3.8 9.78h4.7"></path>
+                                </svg>
+                            </div>
+                            <div class="flex flex-col justify-center items-start">
+                                <div class="flex items-center gap-1">
+                                    <h6 class="font-medium text-sm leading-sm text-gray-600">Total Charges</h6>
+                                    <div class="relative group">
+                                        <div class="cursor-pointer undefined">
+                                            <div class="w-3 h-3 text-neutral-90 border rounded-full border-neutral-90 flex justify-center items-center" aria-describedby="tooltip-pnl-summary-total-charges" aria-label="Total Charges">
+                                                <span class="icon-i-symbol text-[0.438rem] ml-[0.05rem] mt-[0.05rem] font-medium"></span>
+                                            </div>
+                                        </div>
+                                        <div role="tooltip" class="z-50 absolute w-max-content bg-neutral-100 text-neutral-10 text-sm rounded opacity-0 p-2 transition-opacity duration-300 top-[-0.5rem] left-1/2 transform -translate-y-full -translate-x-1/2 hidden !w-60 group-focus-within:opacity-100 group-focus-within:block" id="tooltip-pnl-summary-total-charges">
+                                            <div class="absolute w-[0.625rem] h-[0.625rem] bg-neutral-100 transform rotate-45 top-full left-1/2 bottom-0 -translate-x-[50%] -translate-y-[50%] "></div>
+                                            <div class="relative max-w-[19.25rem] ">
+                                                <div class="flex items-center">
+                                                    <div class="text-sm leading-sm ">Total fees incurred in brokerage, taxes and other charges for the selected period</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-base leading-base font-semibold mt-1 text-gray-900 undefined">₹892.40</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-l border-solid border-neutral-40 h-10"></div>
+                
+                <!-- Net Realized P/L Card -->
+                <div class="flex items-center self-stretch border-b rounded-t-2xl border-success-default flex-grow">
+                    <div class="flex py-3 px-4 items-start self-stretch gap-2.5 flex-grow justify-center">
+                        <div id="pnl-summary-netRealisedPnL" class="flex items-center gap-3 cursor-pointer">
+                            <div class="w-11 h-11 flex justify-center items-center rounded-full bg-success-default">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 27 22" preserveAspectRatio="xMidYMid meet" width="27" height="22">
+                                    <path stroke="var(--color-neutral-90)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.218" d="M8.41 6.852h4.727M8.41 8.88h4.727m-1.379 5.276L8.41 10.91h1.182c2.626 0 2.626-4.058 0-4.058"></path>
+                                    <path stroke="var(--color-neutral-90)" stroke-linecap="round" d="M12.04 20.01H5.562c-.275 0-.413 0-.53-.007a4 4 0 0 1-3.76-3.76c-.006-.117-.006-.254-.006-.53v0V8.34v0c0-3.134 0-4.7.83-5.779a4 4 0 0 1 .73-.731C3.906 1 5.473 1 8.607 1H14.9c1.278 0 1.917 0 2.44.145a4 4 0 0 1 2.79 2.789c.144.523.144 1.162.144 2.44v.208"></path>
+                                    <circle cx="19.761" cy="15.075" r="6.425" fill="rgb(var(--color-neutral-10))" stroke="var(--color-text-success)"></circle>
+                                    <path stroke="var(--color-text-success)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.33" d="m21.538 15.075-1.777-1.778-1.777 1.777m1.774-1.184v4.232"></path>
+                                </svg>
+                            </div>
+                            <div class="flex flex-col justify-center items-start">
+                                <div class="flex items-center gap-1">
+                                    <h6 class="font-medium text-sm leading-sm text-gray-600 underline" tabindex="0" role="button">Net Realized P/L</h6>
+                                    <div class="relative group">
+                                        <div class="cursor-pointer undefined">
+                                            <div class="w-3 h-3 text-neutral-90 border rounded-full border-neutral-90 flex justify-center items-center" aria-describedby="tooltip-pnl-summary-netRealisedPnL" aria-label="Net Realized P/L">
+                                                <span class="icon-i-symbol text-[0.438rem] ml-[0.05rem] mt-[0.05rem] font-medium"></span>
+                                            </div>
+                                        </div>
+                                        <div role="tooltip" class="z-50 absolute w-max-content bg-neutral-100 text-neutral-10 text-sm rounded opacity-0 p-2 transition-opacity duration-300 top-[-0.5rem] left-1/2 transform -translate-y-full -translate-x-1/2 hidden !w-60 group-focus-within:opacity-100 group-focus-within:block" id="tooltip-pnl-summary-netRealisedPnL">
+                                            <div class="absolute w-[0.625rem] h-[0.625rem] bg-neutral-100 transform rotate-45 top-full left-1/2 bottom-0 -translate-x-[50%] -translate-y-[50%] "></div>
+                                            <div class="relative max-w-[19.25rem] ">
+                                                <div class="flex items-center">
+                                                    <div class="text-sm leading-sm ">Realized P/L (-) Total charges incurred for the period</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-base leading-base font-semibold mt-1 text-gray-900 undefined">₹5,934.10</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar Container -->
+            <div class="w-full bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+
+                <!-- Calendar Header with GO BACK button and Date Pill -->
+                <div class="relative flex justify-center pt-3">
+                    <button class="flex items-center justify-center font-medium text-primary-default bg-neutral-10 shadow-primary-dark hover:bg-primary-surface active:text-primary-pressed active:shadow-primary-pressed active:bg-primary-pressed text-sm leading-sm px-2 py-1 rounded absolute left-10 top-4 z-5" id="heatmap-calendar-go-back">
+                        <span class="flex justify-center items-center icon-left font-semibold"></span>
+                        <span class="ml-1">GO BACK</span>
+                    </button>
+                    <section class="flex justify-center w-full mb-3 z-[2]">
+                        <div class="flex items-center w-fit gap-2.5 text-sm leading-sm text-neutral-90 bg-success-surface px-3 py-2 rounded-full !bg-success-surface">
+                            <span>01 Dec 2023 - 31 Dec 2023</span>
+                        </div>
+                    </section>
+                </div>
+
+
+                <!-- MAIN CALENDAR CONTAINER (Three-column layout for side months) -->
+                <div id="calendar-container" class="flex w-full justify-center space-x-2">
+                    
+                    <!-- START LEFT PLACEHOLDER CALENDAR (e.g., November) -->
+                    <div class="year flex-wrap flex-shrink-0 flex flex-col px-5 py-2 items-center border border-neutral-40 rounded-xl w-40">
+                        <div class="flex w-full justify-around border-b border-neutral-40 pb-1">
+                            <span class="text-neutral-30 text-xs leading-xs font-medium" aria-label="Monday">M</span>
+                            <span class="text-neutral-30 text-xs leading-xs font-medium" aria-label="Tuesday">T</span>
+                            <span class="text-neutral-30 text-xs leading-xs font-medium" aria-label="Wednesday">W</span>
+                            <span class="text-neutral-30 text-xs leading-xs font-medium" aria-label="Thursday">T</span>
+                            <span class="text-neutral-30 text-xs leading-xs font-medium" aria-label="Friday">F</span>
+                        </div>
+                        <div class="grid grid-cols-5 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-px after:bg-neutral-10">
+                            <!-- Placeholder cells -->
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                        </div>
+                    </div>
+                    <!-- END LEFT PLACEHOLDER CALENDAR -->
+
+                    <!-- ACTIVE CALENDAR (CENTER) - Renamed inner div for clarity -->
+                    <div id="calendar-grid" class="flex-grow max-w-lg">
+                        <div class="grid grid-cols-5 border-t border-gray-200 w-full">
+                            <div class="col-span-5 grid grid-cols-5 text-xs font-semibold text-gray-500 border-b pb-2 mb-0 text-center">
+                                <span>M</span>
+                                <span>T</span>
+                                <span>W</span>
+                                <span>T</span>
+                                <span>F</span>
+                            </div>
+                            <div class="col-span-5 grid grid-cols-5 border-t border-gray-200">
+                                
+                                <!-- Existing Calendar Cells Start Here -->
+                                
+                                <!-- Week 1: Dec 1st (Fri) -->
+                                <div class="calendar-cell border-l border-gray-200"></div>
+                                <div class="calendar-cell"></div>
+                                <div class="calendar-cell"></div>
+                                <div class="calendar-cell"></div>
+                                
+                                <!-- Day 1 (Friday) - Loss (<1k) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm border-r-0" data-day-id="1">
+                                    <div class="pnl-cell-content group">
+                                        <div class="pnl-dot-wrapper-inner">
+                                            <div id="dot-1" class="pnl-dot" title="Net P/L: -₹162.11">01</div>
+                                            <div class="pnl-tooltip-container">
+                                                <div class="tooltip-title">Gross Realised P/L</div>
+                                                <div class="tooltip-value text-loss" id="tooltip-value-1">-₹162.11</div>
+                                            </div>
+                                        </div>
+                                        <div class="pnl-value-wrapper text-loss">
+                                            <span class="pnl-value">-₹162.11</span>
+                                            <hr class="pnl-value-underline" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Week 2: Dec 4th (Mon) - Dec 8th (Fri) -->
+                                
+                                <!-- Day 4 (Flat) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm border-l border-gray-200" data-day-id="4">
+                                    <div class="flat-date-container">
+                                        <span class="flat-date-number">04</span>
+                                        <span class="flat-dash">–</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Day 5 (Profit >1k) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm" data-day-id="5">
+                                    <div class="pnl-cell-content group">
+                                        <div class="pnl-dot-wrapper-inner">
+                                            <div id="dot-5" class="pnl-dot" title="Net P/L: ₹2,762.70">05</div>
+                                            <div class="pnl-tooltip-container">
+                                                <div class="tooltip-title">Gross Realised P/L</div>
+                                                <div class="tooltip-value text-profit" id="tooltip-value-5">₹2,762.70</div>
+                                            </div>
+                                        </div>
+                                        <div class="pnl-value-wrapper text-profit">
+                                            <span class="pnl-value">₹2,762.70</span>
+                                            <hr class="pnl-value-underline" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Day 6 (Profit <1k) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm" data-day-id="6">
+                                    <div class="pnl-cell-content group">
+                                        <div class="pnl-dot-wrapper-inner">
+                                            <div id="dot-6" class="pnl-dot" title="Net P/L: ₹608.31">06</div>
+                                            <div class="pnl-tooltip-container">
+                                                <div class="tooltip-title">Gross Realised P/L</div>
+                                                <div class="tooltip-value text-profit" id="tooltip-value-6">₹608.31</div>
+                                            </div>
+                                        </div>
+                                        <div class="pnl-value-wrapper text-profit">
+                                            <span class="pnl-value">₹608.31</span>
+                                            <hr class="pnl-value-underline" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Day 7 (Flat) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm" data-day-id="7">
+                                    <div class="flat-date-container">
+                                        <span class="flat-date-number">07</span>
+                                        <span class="flat-dash">–</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Day 8 (Flat) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm border-r-0" data-day-id="8">
+                                    <div class="flat-date-container">
+                                        <span class="flat-date-number">08</span>
+                                        <span class="flat-dash">–</span>
+                                    </div>
+                                </div>
+
+                                <!-- Week 3: Dec 11th (Mon) - Dec 15th (Fri) -->
+                                
+                                <!-- Day 11 (Profit >1k) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm border-l border-gray-200" data-day-id="11">
+                                    <div class="pnl-cell-content group">
+                                        <div class="pnl-dot-wrapper-inner">
+                                            <div id="dot-11" class="pnl-dot" title="Net P/L: ₹1,936.93">11</div>
+                                            <div class="pnl-tooltip-container">
+                                                <div class="tooltip-title">Gross Realised P/L</div>
+                                                <div class="tooltip-value text-profit" id="tooltip-value-11">₹1,936.93</div>
+                                            </div>
+                                        </div>
+                                        <div class="pnl-value-wrapper text-profit">
+                                            <span class="pnl-value">₹1,936.93</span>
+                                            <hr class="pnl-value-underline" />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Day 12 (Profit <1k) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm" data-day-id="12">
+                                    <div class="pnl-cell-content group">
+                                        <div class="pnl-dot-wrapper-inner">
+                                            <div id="dot-12" class="pnl-dot" title="Net P/L: ₹589.50">12</div>
+                                            <div class="pnl-tooltip-container">
+                                                <div class="tooltip-title">Gross Realised P/L</div>
+                                                <div class="tooltip-value text-profit" id="tooltip-value-12">₹589.50</div>
+                                            </div>
+                                        </div>
+                                        <div class="pnl-value-wrapper text-profit">
+                                            <span class="pnl-value">₹589.50</span>
+                                            <hr class="pnl-value-underline" />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Day 13 (Flat) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm" data-day-id="13">
+                                    <div class="flat-date-container">
+                                        <span class="flat-date-number">13</span>
+                                        <span class="flat-dash">–</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Day 14 (Profit >1k) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm" data-day-id="14">
+                                    <div class="pnl-cell-content group">
+                                        <div class="pnl-dot-wrapper-inner">
+                                            <div id="dot-14" class="pnl-dot" title="Net P/L: ₹1,883.05">14</div>
+                                            <div class="pnl-tooltip-container">
+                                                <div class="tooltip-title">Gross Realised P/L</div>
+                                                <div class="tooltip-value text-profit" id="tooltip-value-14">₹1,883.05</div>
+                                            </div>
+                                        </div>
+                                        <div class="pnl-value-wrapper text-profit">
+                                            <span class="pnl-value">₹1,883.05</span>
+                                            <hr class="pnl-value-underline" />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Day 15 (Flat) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm border-r-0" data-day-id="15">
+                                    <div class="flat-date-container">
+                                        <span class="flat-date-number">15</span>
+                                        <span class="flat-dash">–</span>
+                                    </div>
+                                </div>
+
+                                <!-- Week 4: Dec 18th (Mon) - Dec 22nd (Fri) -->
+                                
+                                <!-- Day 18 (Flat) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm border-l border-gray-200" data-day-id="18">
+                                    <div class="flat-date-container">
+                                        <span class="flat-date-number">18</span>
+                                        <span class="flat-dash">–</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Day 19 (Loss >1k) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm" data-day-id="19">
+                                    <div class="pnl-cell-content group">
+                                        <div class="pnl-dot-wrapper-inner">
+                                            <div id="dot-19" class="pnl-dot" title="Net P/L: -₹1,550.03">19</div>
+                                            <div class="pnl-tooltip-container">
+                                                <div class="tooltip-title">Gross Realised P/L</div>
+                                                <div class="tooltip-value text-loss" id="tooltip-value-19">-₹1,550.03</div>
+                                            </div>
+                                        </div>
+                                        <div class="pnl-value-wrapper text-loss">
+                                            <span class="pnl-value">-₹1,550.03</span>
+                                            <hr class="pnl-value-underline" />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Day 20 (Loss <1k) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm" data-day-id="20">
+                                    <div class="pnl-cell-content group">
+                                        <div class="pnl-dot-wrapper-inner">
+                                            <div id="dot-20" class="pnl-dot" title="Net P/L: -₹793.44">20</div>
+                                            <div class="pnl-tooltip-container">
+                                                <div class="tooltip-title">Gross Realised P/L</div>
+                                                <div class="tooltip-value text-loss" id="tooltip-value-20">-₹793.44</div>
+                                            </div>
+                                        </div>
+                                        <div class="pnl-value-wrapper text-loss">
+                                            <span class="pnl-value">-₹793.44</span>
+                                            <hr class="pnl-value-underline" />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Day 21 (Profit >1k) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm" data-day-id="21">
+                                    <div class="pnl-cell-content group">
+                                        <div class="pnl-dot-wrapper-inner">
+                                            <div id="dot-21" class="pnl-dot" title="Net P/L: ₹1,187.51">21</div>
+                                            <div class="pnl-tooltip-container">
+                                                <div class="tooltip-title">Gross Realised P/L</div>
+                                                <div class="tooltip-value text-profit" id="tooltip-value-21">₹1,187.51</div>
+                                            </div>
+                                        </div>
+                                        <div class="pnl-value-wrapper text-profit">
+                                            <span class="pnl-value">₹1,187.51</span>
+                                            <hr class="pnl-value-underline" />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Day 22 (Profit <1k) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm border-r-0" data-day-id="22">
+                                    <div class="pnl-cell-content group">
+                                        <div class="pnl-dot-wrapper-inner">
+                                            <div id="dot-22" class="pnl-dot" title="Net P/L: ₹52.25">22</div>
+                                            <div class="pnl-tooltip-container">
+                                                <div class="tooltip-title">Gross Realised P/L</div>
+                                                <div class="tooltip-value text-profit" id="tooltip-value-22">₹52.25</div>
+                                            </div>
+                                        </div>
+                                        <div class="pnl-value-wrapper text-profit">
+                                            <span class="pnl-value">₹52.25</span>
+                                            <hr class="pnl-value-underline" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Week 5: Dec 25th (Mon) - Dec 29th (Fri) -->
+                                
+                                <!-- Day 25 (Flat) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm border-l border-gray-200" data-day-id="25">
+                                    <div class="flat-date-container">
+                                        <span class="flat-date-number">25</span>
+                                        <span class="flat-dash">–</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Day 26 (Profit >1k) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm" data-day-id="26">
+                                    <div class="pnl-cell-content group">
+                                        <div class="pnl-dot-wrapper-inner">
+                                            <div id="dot-26" class="pnl-dot" title="Net P/L: ₹1,300.40">26</div>
+                                            <div class="pnl-tooltip-container">
+                                                <div class="tooltip-title">Gross Realised P/L</div>
+                                                <div class="tooltip-value text-profit" id="tooltip-value-26">₹1,300.40</div>
+                                            </div>
+                                        </div>
+                                        <div class="pnl-value-wrapper text-profit">
+                                            <span class="pnl-value">₹1,300.40</span>
+                                            <hr class="pnl-value-underline" />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Day 27 (Profit <1k) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm" data-day-id="27">
+                                    <div class="pnl-cell-content group">
+                                        <div class="pnl-dot-wrapper-inner">
+                                            <div id="dot-27" class="pnl-dot" title="Net P/L: ₹646.13">27</div>
+                                            <div class="pnl-tooltip-container">
+                                                <div class="tooltip-title">Gross Realised P/L</div>
+                                                <div class="tooltip-value text-profit" id="tooltip-value-27">₹646.13</div>
+                                            </div>
+                                        </div>
+                                        <div class="pnl-value-wrapper text-profit">
+                                            <span class="pnl-value">₹646.13</span>
+                                            <hr class="pnl-value-underline" />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Day 28 (Loss >1k) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm" data-day-id="28">
+                                    <div class="pnl-cell-content group">
+                                        <div class="pnl-dot-wrapper-inner">
+                                            <div id="dot-28" class="pnl-dot" title="Net P/L: -₹2,527.09">28</div>
+                                            <div class="pnl-tooltip-container">
+                                                <div class="tooltip-title">Gross Realised P/L</div>
+                                                <div class="tooltip-value text-loss" id="tooltip-value-28">-₹2,527.09</div>
+                                            </div>
+                                        </div>
+                                        <div class="pnl-value-wrapper text-loss">
+                                            <span class="pnl-value">-₹2,527.09</span>
+                                            <hr class="pnl-value-underline" />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Day 29 (Flat) -->
+                                <div class="calendar-cell text-center text-gray-800 text-sm border-r-0" data-day-id="29">
+                                    <div class="flat-date-container">
+                                        <span class="flat-date-number">29</span>
+                                        <span class="flat-dash">–</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Close border on the bottom of the last row -->
+                                <div class="col-span-5 border-b border-gray-200 -mt-px"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END ACTIVE CALENDAR (CENTER) -->
+
+                    <!-- START RIGHT PLACEHOLDER CALENDAR (e.g., January) -->
+                    <div class="year flex-wrap flex-shrink-0 flex flex-col px-5 py-2 items-center border border-neutral-40 rounded-xl w-40">
+                        <div class="flex w-full justify-around border-b border-neutral-40 pb-1">
+                            <span class="text-neutral-30 text-xs leading-xs font-medium" aria-label="Monday">M</span>
+                            <span class="text-neutral-30 text-xs leading-xs font-medium" aria-label="Tuesday">T</span>
+                            <span class="text-neutral-30 text-xs leading-xs font-medium" aria-label="Wednesday">W</span>
+                            <span class="text-neutral-30 text-xs leading-xs font-medium" aria-label="Thursday">T</span>
+                            <span class="text-neutral-30 text-xs leading-xs font-medium" aria-label="Friday">F</span>
+                        </div>
+                        <div class="grid grid-cols-5 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-px after:bg-neutral-10">
+                            <!-- Placeholder cells -->
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full bg-neutral-20"></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                            <div class="h-10 relative flex items-center justify-center border-r border-b border-neutral-20 last:border-r-0"><div class="w-3 h-3 border-2 border-neutral-20 rounded-full "></div></div>
+                        </div>
+                    </div>
+                    <!-- END RIGHT PLACEHOLDER CALENDAR -->
+
+                </div>
+                <!-- END MAIN CALENDAR CONTAINER -->
+
+                <div class="flex justify-end items-center mt-4 text-xs font-medium text-gray-600">
+                    <span class="flex items-center mr-2">
+                        <span class="w-2 h-2 rounded-full bg-[#0c8b67] mr-1"></span>
+                        <span class="mr-3">Profit</span>
+                    </span>
+                    <span class="flex items-center mr-2">
+                        <span class="w-2 h-2 rounded-full bg-[#e54b63] mr-1"></span>
+                        <span class="mr-3">Loss</span>
+                    </span>
+                    <span class="flex items-center mr-3">
+                        <span class="w-2 h-2 rounded-full bg-white mr-1 border border-gray-400"></span>
+                        <span class="mr-3">No Trade/Flat</span>
+                    </span>
+                    <span class="mr-3">What do these circles indicate?</span>
+                    <a href="#" class="text-blue-600 hover:underline">Know more</a>
+                </div>
+            </div> <!-- End Calendar Panel -->
+
+            <!-- P&L Summary Table Section -->
+            <div id="pnl-table-section" class="w-full bg-white rounded-xl shadow-lg p-6 border border-gray-200 mt-6">
+                <div class="flex justify-between items-center mb-4">
+                    <p id="table-summary-text" class="text-sm font-semibold text-gray-700">Showing P&L Summary (Date-Wise) for 01 Dec 2023 - 31 Dec 2023</p>
+                    <div class="flex space-x-2 text-sm border border-gray-300 rounded-md">
+                        <button id="date-wise-button" class="px-2 py-1 rounded-md text-white bg-blue-600 font-medium shadow-md">Date-Wise View</button>
+                        <button id="scrip-wise-button" class="px-2 py-1 rounded-md text-gray-600 bg-white hover:bg-gray-100 font-medium">Scrip-Wise View</button>
+                    </div>
+                </div>
+
+                <div class="pnl-table-container overflow-x-auto" style="max-height: 480px;">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50 sticky top-0" id="pnl-table-head">
+                            <!-- Table Head will be dynamically loaded -->
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200 text-sm" id="pnl-table-body">
+                            <!-- Table rows populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div> <!-- End P&L Summary Table Section -->
+
+        </div>
+    </div>
+    
+    <!-- Custom Modal Structure -->
+    <div id="daily-detail-modal" class="modal-backdrop hidden">
+        <div class="modal-content">
+            <div class="flex justify-between items-center pb-3 border-b border-gray-200 mb-4">
+                <h3 id="modal-title" class="text-lg font-semibold text-gray-800"></h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div id="modal-body" class="text-sm text-gray-700">
+                <!-- Details will be inserted here -->
+            </div>
+            <button onclick="closeModal()" class="mt-6 w-full py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition">
+                Close
+            </button>
+        </div>
+    </div>
+
+
+    <script>
+        const pnlData = [
+            { id: 1, date: "01", fullDate: "1 December 2023", trades: 1, realized: -94.50, charges: 67.61, net: -162.11 },
+            { id: 4, date: "04", fullDate: "4 December 2023", trades: 0, realized: 0, charges: 0, net: 0, isFlat: true },
+            { id: 5, date: "05", fullDate: "5 December 2023", trades: 1, realized: 2830.50, charges: 67.80, net: 2762.70 },
+            { id: 6, date: "06", fullDate: "6 December 2023", trades: 1, realized: 660.75, charges: 52.44, net: 608.31 },
+            { id: 7, date: "07", fullDate: "7 December 2023", trades: 0, realized: 0, charges: 0, net: 0, isFlat: true },
+            { id: 8, date: "08", fullDate: "8 December 2023", trades: 0, realized: 0, charges: 0, net: 0, isFlat: true },
+            { id: 11, date: "11", fullDate: "11 December 2023", trades: 1, realized: 2002.50, charges: 65.57, net: 1936.93 },
+            { id: 12, date: "12", fullDate: "12 December 2023", trades: 1, realized: 642.00, charges: 52.50, net: 589.50 },
+            { id: 13, date: "13", fullDate: "13 December 2023", trades: 0, realized: 0, charges: 0, net: 0, isFlat: true },
+            { id: 14, date: "14", fullDate: "14 December 2023", trades: 1, realized: 1953.00, charges: 69.95, net: 1883.05 },
+            { id: 15, date: "15", fullDate: "15 December 2023", trades: 0, realized: 0, charges: 0, net: 0, isFlat: true },
+            { id: 18, date: "18", fullDate: "18 December 2023", trades: 0, realized: 0, charges: 0, net: 0, isFlat: true },
+            { id: 19, date: "19", fullDate: "19 December 2023", trades: 1, realized: -1494.00, charges: 56.03, net: -1550.03 },
+            { id: 20, date: "20", fullDate: "20 December 2023", trades: 1, realized: -678.00, charges: 115.44, net: -793.44 },
+            { id: 21, date: "21", fullDate: "21 December 2023", trades: 1, realized: 1257.00, charges: 69.49, net: 1187.51 },
+            { id: 22, date: "22", fullDate: "22 December 2023", trades: 1, realized: 120.00, charges: 67.75, net: 52.25 },
+            { id: 25, date: "25", fullDate: "25 December 2023", trades: 0, realized: 0, charges: 0, net: 0, isFlat: true },
+            { id: 26, date: "26", fullDate: "26 December 2023", trades: 1, realized: 1392.75, charges: 92.35, net: 1300.40 },
+            { id: 27, date: "27", fullDate: "27 December 2023", trades: 1, realized: 708.00, charges: 61.87, net: 646.13 },
+            { id: 28, date: "28", fullDate: "28 December 2023", trades: 1, realized: -2473.50, charges: 53.59, net: -2527.09 },
+            { id: 29, date: "29", fullDate: "29 December 2023", trades: 0, realized: 0, charges: 0, net: 0, isFlat: true },
+        ].reduce((acc, item) => {
+            acc[item.id] = item;
+            return acc;
+        }, {});
+
+        // This data matches the date-wise summary table shown in the screenshot (sorted descending by date)
+        const summaryTableData = [
+            { date: "28 December 2023", trades: 1, realized: -2473.50, charges: 53.59, net: -2527.09 },
+            { date: "27 December 2023", trades: 1, realized: 708.00, charges: 61.87, net: 646.13 },
+            { date: "26 December 2023", trades: 1, realized: 1392.75, charges: 92.35, net: 1300.40 },
+            { date: "22 December 2023", trades: 1, realized: 120.00, charges: 67.75, net: 52.25 },
+            { date: "21 December 2023", trades: 1, realized: 1257.00, charges: 69.49, net: 1187.51 },
+            { date: "20 December 2023", trades: 1, realized: -678.00, charges: 115.44, net: -793.44 },
+            { date: "19 December 2023", trades: 1, realized: -1494.00, charges: 56.03, net: -1550.03 },
+            { date: "14 December 2023", trades: 1, realized: 1953.00, charges: 69.95, net: 1883.05 },
+            { date: "12 December 2023", trades: 1, realized: 642.00, charges: 52.50, net: 589.50 },
+            { date: "11 December 2023", trades: 1, realized: 2002.50, charges: 65.57, net: 1936.93 },
+            { date: "6 December 2023", trades: 1, realized: 660.75, charges: 52.44, net: 608.31 },
+            { date: "5 December 2023", trades: 1, realized: 2830.50, charges: 67.80, net: 2762.70 },
+            { date: "1 December 2023", trades: 1, realized: -94.50, charges: 67.61, net: -162.11 },
+        ];
+
+        // New mock data for Scrip-Wise view
+        const scripTableData = [
+            { scrip: "NIFTY", type: "Index F&O", trades: 7, realized: 10450.00, charges: 350.25, net: 10099.75 },
+            { scrip: "TCS", type: "Equity", trades: 2, realized: 1200.00, charges: 85.00, net: 1115.00 },
+            { scrip: "HDFCBANK", type: "Equity", trades: 1, realized: -94.50, charges: 67.61, net: -162.11 },
+            { scrip: "RELIANCE", type: "Equity", trades: 2, realized: -2100.00, charges: 155.00, net: -2255.00 },
+            { scrip: "SBIN", type: "Equity", trades: 1, realized: -2473.50, charges: 53.59, net: -2527.09 },
+            // Add other mock scrips to match total P&L: 5934.10
+        ];
+        
+        let currentView = 'date-wise'; // 'date-wise' or 'scrip-wise'
+        
+        // Function to handle number formatting (adds commas and handles sign)
+        function formatRupee(value, isNet = false) {
+            // Use en dash (–) for negative sign and match decimal precision
+            if (value === 0) return '₹0.00';
+            const sign = value < 0 ? '–' : (isNet ? '' : ''); 
+            const absValue = Math.abs(value);
+            return `${sign}₹${absValue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+        }
+        
+        // Function to determine dot size based on P&L magnitude
+        function getDotSize(netPnl) {
+            const absPnl = Math.abs(netPnl);
+            if (absPnl >= 1500) {
+                return 'size-lg'; // Large dot for high profit/loss
+            } else if (absPnl >= 500) {
+                return 'size-md'; // Medium dot for moderate profit/loss
+            } else if (absPnl > 0) {
+                return 'size-sm'; // Small dot for minor profit/loss
+            }
+            return ''; 
+        }
+        
+        // Function to determine dot color (shade)
+        function getDotColor(netPnl) {
+            const absPnl = Math.abs(netPnl);
+            if (netPnl > 0) {
+                // Profit: Dark green for high, light green for low
+                return absPnl >= 1000 ? 'dot-profit-dg' : 'dot-profit-lg';
+            } else if (netPnl < 0) {
+                // Loss: Dark red for high, light red for low
+                return absPnl >= 1000 ? 'dot-loss-dr' : 'dot-loss-lr';
+            }
+            return '';
+        }
+
+        function applyDynamicStyles() {
+            // Loop through all P&L items, including flat days for the loop context
+            Object.values(pnlData).forEach(item => {
+                if (item.isFlat) return; // Skip flat days as they don't have PNL dots
+
+                const dotElement = document.getElementById(`dot-${item.id}`);
+                const tooltipValueElement = document.getElementById(`tooltip-value-${item.id}`);
+                const pnlValueWrapper = document.querySelector(`.calendar-cell[data-day-id="${item.id}"] .pnl-value-wrapper`);
+                const pnlUnderline = pnlValueWrapper ? pnlValueWrapper.querySelector('.pnl-value-underline') : null;
+
+
+                if (dotElement && tooltipValueElement && pnlValueWrapper) {
+                    const sizeClass = getDotSize(item.net);
+                    const colorClass = getDotColor(item.net);
+                    
+                    dotElement.classList.add(sizeClass, colorClass);
+                    
+                    // Apply PNL value color class to the wrapper for underline color inheritance
+                    pnlValueWrapper.classList.add(item.net >= 0 ? 'text-profit' : 'text-loss');
+
+                    // Set underline width based on magnitude (simulated opacity logic from screenshot)
+                    const absNet = Math.abs(item.net);
+                    let underlineWidth = '100%';
+                    if (absNet < 100) underlineWidth = '30%';
+                    else if (absNet < 500) underlineWidth = '50%';
+                    else if (absNet < 1500) underlineWidth = '75%';
+                    
+                    if (pnlUnderline) {
+                        pnlUnderline.style.width = underlineWidth;
+                    }
+
+                    // Update Tooltip content for correct color
+                    tooltipValueElement.textContent = formatRupee(item.net);
+                    tooltipValueElement.classList.add(item.net >= 0 ? 'text-profit' : 'text-loss');
+                }
+            });
+        }
+
+        // Modified to handle both date-wise and scrip-wise row data
+        function createPnlRow(data, isScripView) {
+            const netColor = data.net >= 0 ? 'text-profit' : 'text-loss';
+            const realizedColor = data.realized >= 0 ? 'text-profit' : 'text-loss';
+
+            const realizedText = formatRupee(data.realized);
+            const netText = formatRupee(data.net); 
+            const chargesText = `₹${data.charges.toFixed(2)}`;
+            const trades = data.trades;
+
+            if (isScripView) {
+                return `
+                    <tr class="table-row-data group hover:bg-gray-50 cursor-pointer">
+                        <td class="px-4 py-2 whitespace-nowrap text-blue-600 group-hover:underline border-r border-gray-200">${data.scrip} <span class="text-xs text-gray-500 font-normal">(${data.type})</span></td>
+                        <td class="px-4 py-2 whitespace-nowrap text-right text-gray-800 border-r border-gray-200">${trades}</td>
+                        <td class="px-4 py-2 whitespace-nowrap text-right ${realizedColor} border-r border-gray-200">${realizedText}</td>
+                        <td class="px-4 py-2 whitespace-nowrap text-right text-gray-800 border-r border-gray-200">${chargesText}</td>
+                        <td class="px-4 py-2 whitespace-nowrap text-right ${netColor} font-medium">${netText}</td>
+                    </tr>
+                `;
+            } else {
+                return `
+                    <tr class="table-row-data">
+                        <td class="px-4 py-2 whitespace-nowrap text-blue-600 hover:underline cursor-pointer border-r border-gray-200">${data.date}</td>
+                        <td class="px-4 py-2 whitespace-nowrap text-right text-gray-800 border-r border-gray-200">${trades}</td>
+                        <td class="px-4 py-2 whitespace-nowrap text-right ${realizedColor} border-r border-gray-200">${realizedText}</td>
+                        <td class="px-4 py-2 whitespace-nowrap text-right text-gray-800 border-r border-gray-200">${chargesText}</td>
+                        <td class="px-4 py-2 whitespace-nowrap text-right ${netColor} font-medium">${netText}</td>
+                    </tr>
+                `;
+            }
+        }
+
+        function updateTableHead(isScripView) {
+            const thead = document.getElementById('pnl-table-head');
+            
+            if (isScripView) {
+                thead.innerHTML = `
+                    <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Scrip / Instrument</th>
+                        <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">No Of Trades</th>
+                        <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Realized P/L</th>
+                        <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Charges</th>
+                        <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Net Realised P&L</th>
+                    </tr>
+                `;
+            } else {
+                thead.innerHTML = `
+                    <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                        <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">No Of Trades</th>
+                        <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Realized P/L</th>
+                        <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Charges</th>
+                        <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Net Realised P&L</th>
+                    </tr>
+                `;
+            }
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('pnl-table-body');
+            const summaryText = document.getElementById('table-summary-text');
+            const dateButton = document.getElementById('date-wise-button');
+            const scripButton = document.getElementById('scrip-wise-button');
+
+            const isScripView = currentView === 'scrip-wise';
+            const dataToRender = isScripView ? scripTableData : summaryTableData;
+            const viewTitle = isScripView ? 'Scrip-Wise' : 'Date-Wise';
+
+            // 1. Update Buttons
+            dateButton.classList.toggle('active', !isScripView);
+            dateButton.classList.toggle('text-white', !isScripView);
+            dateButton.classList.toggle('bg-blue-600', !isScripView);
+            dateButton.classList.toggle('text-gray-600', isScripView);
+            dateButton.classList.toggle('bg-white', isScripView);
+
+            scripButton.classList.toggle('active', isScripView);
+            scripButton.classList.toggle('text-white', isScripView);
+            scripButton.classList.toggle('bg-blue-600', isScripView);
+            scripButton.classList.toggle('text-gray-600', !isScripView);
+            scripButton.classList.toggle('bg-white', !isScripView);
+
+            // 2. Update Header Text
+            summaryText.textContent = `Showing P&L Summary (${viewTitle}) for 01 Dec 2023 - 31 Dec 2023`;
+
+            // 3. Update Table Head Structure
+            updateTableHead(isScripView);
+
+            // 4. Populate Table Body
+            tbody.innerHTML = dataToRender.map(data => createPnlRow(data, isScripView)).join('');
+        }
+        
+        // --- Modal Functions ---
+        
+        function showModal(title, bodyHtml) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-body').innerHTML = bodyHtml;
+            document.getElementById('daily-detail-modal').classList.remove('hidden');
+        }
+
+        window.closeModal = function() {
+            document.getElementById('daily-detail-modal').classList.add('hidden');
+        }
+
+        window.showDailyDetails = function(event) {
+            // Only show modal when in date-wise view and clicking a calendar cell
+            if (currentView === 'scrip-wise') return;
+
+            // Find the closest calendar cell element that has the data-day-id attribute
+            const cell = event.target.closest('.calendar-cell');
+            if (!cell) return;
+
+            const dayId = parseInt(cell.getAttribute('data-day-id'));
+            const data = pnlData[dayId];
+            
+            if (!data) {
+                console.error(`No data found for day ID: ${dayId}`);
+                return;
+            }
+
+            const isProfit = data.net > 0;
+            const netColorClass = data.net >= 0 ? 'text-profit' : 'text-loss';
+            const realizedColorClass = data.realized >= 0 ? 'text-profit' : 'text-loss';
+
+            let bodyHtml = '';
+
+            if (data.isFlat) {
+                bodyHtml = `
+                    <p class="text-lg font-medium text-gray-500 mb-2">No Trades Recorded</p>
+                    <p class="text-gray-600">There were no realized profits or losses for December ${data.date}.</p>
+                `;
+            } else {
+                bodyHtml = `
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center py-1">
+                            <span class="text-gray-500">Realized P/L:</span>
+                            <span class="font-semibold ${realizedColorClass}">${formatRupee(data.realized)}</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1">
+                            <span class="text-gray-500">Charges:</span>
+                            <span class="font-semibold text-gray-800">${formatRupee(data.charges)}</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1 border-t border-gray-200 pt-3 mt-3">
+                            <span class="text-lg font-medium ${isProfit ? 'text-profit' : 'text-loss'}">Net Realized P/L:</span>
+                            <span class="text-lg font-bold ${netColorClass}">${formatRupee(data.net)}</span>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-xs text-gray-500">This data represents the final Profit & Loss after all trades and charges for the day.</p>
+                `;
+            }
+
+            showModal(`P&L Details for ${data.fullDate}`, bodyHtml);
+        }
+
+        window.onload = () => {
+            // Apply dynamic sizes and colors to the calendar dots
+            applyDynamicStyles();
+            
+            // Initial render of the table (Date-Wise)
+            renderTable();
+
+            // Add click event listener to the main calendar grid
+            document.getElementById('calendar-grid').addEventListener('click', showDailyDetails);
+
+            // Add event listeners for table view toggles
+            document.getElementById('date-wise-button').addEventListener('click', () => {
+                currentView = 'date-wise';
+                renderTable();
+            });
+
+            document.getElementById('scrip-wise-button').addEventListener('click', () => {
+                currentView = 'scrip-wise';
+                renderTable();
+            });
+        };
+    </script>
+</body>
+</html>
